@@ -1,0 +1,29 @@
+// 首页
+extends ../layout
+
+block content
+    .container
+        .row
+            each cat in categories
+                .panel.panel-default
+                    .panel-heading
+                        h3
+                        //- 由于后面要做分页，所以这里传递一个page的参数p=0
+                        a(href="/results?cat=#{cat._id}&p=0") #{cat.name}
+                    .panel-body
+                        //- 如果电影分类中有电影，则进行迭代显示出来
+                        if cat.movies && cat.movies.length > 0
+                            each item in cat.movies
+                                .col-md-2
+                                    //- 这是缩略图
+                                    .thumbnail
+                                        a(href="/movie/#{item._id}")
+                                            //- 这里判断的是海报是网上的还是上传的
+                                            if item.poster.indexOf('http') > -1
+                                                img(src="#{item.poster}", alt="#{item.title}")
+                                            else
+                                                img(src="/upload/#{item.poster}", alt="#{item.title}")
+                                        .caption
+                                            h3 #{item.title}
+                                            p: a.btn.btn-primary(href="/movie/#{item._id}", role="button") 观看预告片
+

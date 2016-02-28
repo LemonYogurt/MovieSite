@@ -1,0 +1,69 @@
+// 电影录入页
+extends ../layout
+
+block content
+    .container
+        .row
+            //- 增加enctype的目的是为了告诉表单，我们在提交表单的时候，能够将里面的这些数据进行一个分隔，从而能够达到支持多种数据混合上传的目的
+            form.form-horizonal(method="POST", action="/admin/movie/add", enctype="multipart/form-data")
+                .form-group
+                    label.col-sm-2.control-label 豆瓣同步
+                    .col-sm-10
+                        input#douban.form-control(type="text")
+                    if movie._id
+                        //- 隐藏的表单域，用来更新电影的数据
+                        input(type="hidden", name="movie[_id]", value="movie._id")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputCategory") 电影分类
+                        .col-sm-10
+                            //- 这里categoryName，如果输入了该值，表示数据库中没有该内容，就会在数据库中去添加进这个分类
+                            input#inputCategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName)
+                    .form-group.clearfix
+                        label.col-sm-2.control-label 分类选择
+                        each cat in categories
+                            label.radio-inline
+                                if movie.category
+                                    input(type="radio", name="movie[category]", value=cat._id, checked=cat._id.toString()==movie.category.toString())
+                                else
+                                    input(type="radio", name="movie[category]", value=cat._id)
+                                | #{cat.name}
+                    .form-group
+                        label.col-sm-2.control-label(for="inputTitle") 电影名字
+                        .col-sm-10
+                            input#inputTitle.form-control(type="text", name="movie[title]", value=movie.category)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputDoctor") 电影导演
+                        .col-sm-10
+                            input#inputDoctor.form-control(type="text", name="movie[doctor]", value=movie.doctor)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputCountry") 国家
+                        .col-sm-10
+                            input#inputCountry.form-control(type="text", name="movie[country]", value=movie.country)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputLanguage") 语种
+                        .col-sm-10
+                            input#inputLanguage.form-control(type="text", name="movie[language]", value=movie.language)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputPoster") 海报地址
+                        .col-sm-10
+                            input#inputPoster.form-control(type="text", name="movie[poster]", value=movie.poster)
+                    .form-group
+                        label.col-sm-2.control-label(for="uploadPoster") 海报上传
+                        .col-sm-10
+                            input#uploadPoster.form-control(type="file", name="uploadPoster")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputFlash") 片源地址
+                        .col-sm-10
+                            input#inputFlash.form-control(type="text", name="movie[flash]", value=movie.flash)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputYear") 上映年代
+                        .col-sm-10
+                            input#inputYear.form-control(type="text", name="movie[year]", value=movie.year)
+                    .form-group
+                        label.col-sm-2.control-label(for="inputSummary") 电影简介
+                        .col-sm-10
+                            textarea#inputSummary.form-control(type="text", name="movie[summary]", style="resize:none;")= movie.summary
+                    .form-group
+                        .col-sm-offset-2.col-sm-10
+                        button.btn.btn-success(type="submit") 录入
+    script(src="/js/admin.js")

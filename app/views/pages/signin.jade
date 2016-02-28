@@ -1,0 +1,19 @@
+// 登录页面
+extends ../layout
+block content
+   .container
+      .row
+         .col-md-5
+            form(method="POST", action="/user/signin")
+               .form-group
+                  label(for="signinName") 用户名
+                  //- 这样提交表单的时候就能直接拿到user这个对象
+                  input#signinName.form-control(name="user[name]", type="text")
+               .form-group
+                  label(for="signinPassword") 密码
+                  //- 这样提交表单的时候就能直接拿到user这个对象
+                  input#signinPassword.form-control(name="user[password]", type="password")
+               .modal-footer
+                  //- data-dismiss是用来关闭模态窗口的
+                  button.btn.btn-default(type="button", data-dismiss="modal") 关闭
+                  button.btn.btn-success(type="submit") 登录

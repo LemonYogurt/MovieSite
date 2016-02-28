@@ -1,0 +1,26 @@
+{
+  "name": "moviesite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.0",
+    "connect-mongo": "^1.1.0",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "moment": "^2.11.2",
+    "mongoose": "^4.4.5",
+    "morgan": "^1.7.0",
+    "serve-favicon": "^2.3.0",
+    "underscore": "^1.8.3"
+  }
+}
